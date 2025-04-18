@@ -17,13 +17,15 @@ function App() {
     addUser('test')
   }
   
-  const [ value, setValue ] = useState<Comment[] | null>(null)
+  // const [ value, setValue ] = useState<Comment[] | null>(null)
+
+  const commentsByUserId = getCommentsByUser(1)
 
   useEffect(() => {
     fetchUsers()
     fetchComments()
 
-    setValue(getCommentsByUser(1))
+    // setValue(getCommentsByUser(1))
   }, [fetchUsers, fetchComments, getCommentsByUser])
 
   return (
@@ -35,7 +37,7 @@ function App() {
         <button onClick={onBtnClick}>
           create
         </button>
-        {(value || []).map((comment) => (
+        {(commentsByUserId || []).map((comment) => (
           <div key={comment.id}>{comment.id}. {comment.body}</div>
         ))}
         <div> --- </div>
